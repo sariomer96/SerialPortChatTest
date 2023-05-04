@@ -34,7 +34,9 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.buttonDisconnect = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxReceived = new System.Windows.Forms.TextBox();
+            this.textBoxSend = new System.Windows.Forms.TextBox();
+            this.buttonSend = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -55,6 +57,10 @@
             this.buttonConnect.UseVisualStyleBackColor = true;
             this.buttonConnect.Click += new System.EventHandler(this.button1_Click);
             // 
+            // serialPort1
+            // 
+            this.serialPort1.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.serialPort1_DataReceived);
+            // 
             // buttonDisconnect
             // 
             this.buttonDisconnect.Location = new System.Drawing.Point(275, 20);
@@ -65,20 +71,39 @@
             this.buttonDisconnect.UseVisualStyleBackColor = true;
             this.buttonDisconnect.Click += new System.EventHandler(this.buttonDisconnect_Click);
             // 
-            // textBox1
+            // textBoxReceived
             // 
-            this.textBox1.Location = new System.Drawing.Point(40, 110);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(288, 224);
-            this.textBox1.TabIndex = 4;
+            this.textBoxReceived.Location = new System.Drawing.Point(40, 110);
+            this.textBoxReceived.Multiline = true;
+            this.textBoxReceived.Name = "textBoxReceived";
+            this.textBoxReceived.Size = new System.Drawing.Size(354, 224);
+            this.textBoxReceived.TabIndex = 4;
+            // 
+            // textBoxSend
+            // 
+            this.textBoxSend.Location = new System.Drawing.Point(40, 371);
+            this.textBoxSend.Name = "textBoxSend";
+            this.textBoxSend.Size = new System.Drawing.Size(287, 20);
+            this.textBoxSend.TabIndex = 5;
+            // 
+            // buttonSend
+            // 
+            this.buttonSend.Location = new System.Drawing.Point(336, 368);
+            this.buttonSend.Name = "buttonSend";
+            this.buttonSend.Size = new System.Drawing.Size(58, 22);
+            this.buttonSend.TabIndex = 6;
+            this.buttonSend.Text = "Send";
+            this.buttonSend.UseVisualStyleBackColor = true;
+            this.buttonSend.Click += new System.EventHandler(this.buttonSend_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.buttonSend);
+            this.Controls.Add(this.textBoxSend);
+            this.Controls.Add(this.textBoxReceived);
             this.Controls.Add(this.buttonDisconnect);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.comboBox1);
@@ -89,7 +114,13 @@
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.TextBox textBoxSend;
+
+        private System.Windows.Forms.Button buttonSend;
+
         private System.Windows.Forms.TextBox textBox1;
+
+        private System.Windows.Forms.TextBox textBoxReceived;
 
         private System.Windows.Forms.Button buttonDisconnect;
 

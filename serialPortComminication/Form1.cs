@@ -37,6 +37,7 @@ namespace serialPortComminication
         
             comboBox1.SelectedIndex =0;
             buttonDisconnect.Enabled = false;
+            buttonSend.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -61,6 +62,7 @@ namespace serialPortComminication
             {
                 buttonConnect.Enabled = false;
                 buttonDisconnect.Enabled = true;
+                buttonSend.Enabled = true;
             }
                 
 
@@ -73,9 +75,34 @@ namespace serialPortComminication
                 serialPort1.Close();
                 buttonConnect.Enabled = true;
                 buttonDisconnect.Enabled = false;
+                buttonSend.Enabled = false;
             }
               
              
+        }
+
+        private void buttonSend_Click(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen)
+            {
+                serialPort1.Write(textBoxSend.Text);
+                textBoxSend.Clear();
+            }
+        }
+
+        public delegate void ShowData(string s);
+
+        public void WriteTextBox(string s)
+        {
+            
+            textBoxReceived.Text +=s+ Environment.NewLine;
+         
+        }
+       
+        private void serialPort1_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            string receivedData = serialPort1.ReadExisting();
+            textBoxReceived.Invoke(new ShowData(WriteTextBox), receivedData);
         }
     }
 }
