@@ -1,3 +1,3 @@
 # SerialPortChatTest
 
-Chat application with serial communication method
+Basic chat application with serial communication method
